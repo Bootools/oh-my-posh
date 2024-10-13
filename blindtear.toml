@@ -7,73 +7,93 @@ type = "prompt"
 newline = true
 alignment = "left"
 
-  [[blocks.segments]]
-  type = "session"
-  style = "powerline"
-  leading_powerline_symbol = ""
-  powerline_symbol = ""
-  background = "magenta"
-  foreground = "black"
-  template = "{{ if .SSHSession }} {{ end }}{{ .UserName }}"
+	[[blocks.segments]]
+	type = "session"
+	style = "powerline"
+	leading_powerline_symbol = ""
+	powerline_symbol = ""
+	background = "magenta"
+	foreground = "black"
+	template = "{{ if .SSHSession }} {{ end }}{{ .UserName }}"
 
-  [[blocks.segments]]
-  type = "path"
-  style = "plain"
-  foreground = "blue"
+	[[blocks.segments]]
+	type = "path"
+	style = "plain"
+	foreground = "blue"
 
-    [blocks.segments.properties]
-    style = "letter"
-    home_icon = "󱂵 "
+		[blocks.segments.properties]
+		style = "letter"
+		home_icon = "󱂵 "
 
 [[blocks]]
 type = "prompt"
 alignment = "right"
 
-  [[blocks.segments]]
-  foreground = "default"
-  template = " {{ .CurrentDate | date .Format }} "
-  style = "plain"
-  type = "time"
+	[[blocks.segments]]
+	foreground = "default"
+	template = " {{ .CurrentDate | date .Format }} "
+	style = "plain"
+	type = "time"
 
-    [blocks.segments.properties]
-    time_format = "15:04"
+		[blocks.segments.properties]
+		time_format = "15:04"
 
-  [[blocks.segments]]
-  type = "executiontime"
-  style = "diamond"
-  leading_diamond = ""
-  trailing_diamond = ""
-  foreground = "black"
-  background = "yellow"
+	[[blocks.segments]]
+	type = "executiontime"
+	style = "diamond"
+	leading_diamond = ""
+	trailing_diamond = ""
+	foreground = "black"
+	background = "yellow"
 
-    [blocks.segments.properties]
-    threshold = 500
-    style = "round"
+		[blocks.segments.properties]
+		threshold = 500
+		style = "round"
+
+	[[blocks.segments]]
+	type = "git"
+	style = "diamond"
+	leading_diamond = ""
+	trailing_diamond = ""
+	foreground = "black"
+	background = "default"
+	background_templates = [
+		"{{ if or (.Working.Changed) (.Staging.Changed) }}yellow{{ end }}",
+		"{{ if and (gt .Ahead 0) (gt .Behind 0) }}red{{ end }}",
+		"{{ if gt .Ahead 0 }}pink{{ end }}",
+		"{{ if gt .Behind 0 }}pink{{ end }}",
+	]
+	template = "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
+
+		[blocks.segments.properties]
+		fetch_status = true
+		fetch_upstream_icon = true
+		source = "cli"
 
 [[blocks]]
 type = "prompt"
 newline = true
 alignment = "left"
 
-  [[blocks.segments]]
-  type = "os"
-  style = "plain"
-  foreground = "blue"
+	[[blocks.segments]]
+	type = "os"
+	style = "plain"
+	foreground = "blue"
 
-  [[blocks.segments]]
-  type = "text"
-  style = "plain"
-  foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}blue{{end}}",
-  ]
-  background = "transparent"
-  template = "❯"
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground_templates = [
+		"{{if gt .Code 0}}red{{end}}",
+		"{{if eq .Code 0}}blue{{end}}",
+	]
+	background = "transparent"
+	template = "❯"
 
 [transient_prompt]
 foreground_templates = [
-  "{{if gt .Code 0}}red{{end}}",
-  "{{if eq .Code 0}}blue{{end}}",
+	"{{if gt .Code 0}}red{{end}}",
+	"{{if eq .Code 0}}blue{{end}}",
 ]
 background = "transparent"
 template = " ❯ "
