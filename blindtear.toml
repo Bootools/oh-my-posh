@@ -4,7 +4,7 @@ final_space = true
 [transient_prompt]
   template = ' ❯ '
   background = 'transparent'
-  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}blue{{end}}']
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}cyan{{end}}']
 
 [[blocks]]
   type = 'prompt'
@@ -15,13 +15,13 @@ final_space = true
     template = '{{ if .SSHSession }} {{ end }}{{ .UserName }}'
     foreground = 'black'
     powerline_symbol = ''
-    background = 'magenta'
+    background = 'cyan'
     type = 'session'
     style = 'powerline'
     leading_powerline_symbol = '█'
 
   [[blocks.segments]]
-    foreground = 'blue'
+    foreground = 'lightWhite'
     type = 'path'
     style = 'plain'
 
@@ -75,7 +75,7 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    foreground = 'blue'
+    foreground = 'lightWhite'
     type = 'os'
     style = 'plain'
 
@@ -84,4 +84,4 @@ final_space = true
     background = 'transparent'
     type = 'text'
     style = 'plain'
-    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}blue{{end}}']
+    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}cyan{{end}}']
