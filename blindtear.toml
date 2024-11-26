@@ -12,13 +12,20 @@ final_space = true
   newline = false
 
   [[blocks.segments]]
-    template = '{{ if .SSHSession }} {{ end }}{{ .UserName }}'
+    template = ' {{ .HostName }}'
     foreground = 'black'
+    leading_powerline_symbol = '█'
     powerline_symbol = ''
     background = 'cyan'
     type = 'session'
     style = 'powerline'
-    leading_powerline_symbol = '█'
+
+  [[blocks.segments]]
+    background = 'darkGray'
+    foreground = 'default'
+    type = 'os'
+    style = 'powerline'
+    powerline_symbol = ''
 
   [[blocks.segments]]
     foreground = 'lightWhite'
@@ -74,14 +81,15 @@ final_space = true
   alignment = 'left'
   newline = true
 
-  [[blocks.segments]]
+[[blocks.segments]]
     foreground = 'lightWhite'
-    type = 'os'
+    type = 'session'
     style = 'plain'
+    template = ' {{ if .SSHSession }} {{ end }} {{ .UserName }} '
 
   [[blocks.segments]]
-    template = '❯'
+    template = ''
     background = 'transparent'
     type = 'text'
     style = 'plain'
-    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}cyan{{end}}']
+    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}lightWhite{{end}}']
